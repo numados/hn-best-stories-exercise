@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.BestStories.Client", "src\HackerNews.BestStories.Client\HackerNews.BestStories.Client.csproj", "{7C994725-08D6-4B77-81CD-81BC292693B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.BestStories.Api", "src\HackerNews.BestStories.Api\HackerNews.BestStories.Api.csproj", "{67D99B94-B3B4-4D78-8F66-01DE92E64638}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.BestStories.Tests", "tests\HackerNews.BestStories.Tests\HackerNews.BestStories.Tests.csproj", "{FA18471D-C57D-4144-B312-6963CF9E0611}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C994725-08D6-4B77-81CD-81BC292693B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C994725-08D6-4B77-81CD-81BC292693B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C994725-08D6-4B77-81CD-81BC292693B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C994725-08D6-4B77-81CD-81BC292693B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D99B94-B3B4-4D78-8F66-01DE92E64638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D99B94-B3B4-4D78-8F66-01DE92E64638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D99B94-B3B4-4D78-8F66-01DE92E64638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D99B94-B3B4-4D78-8F66-01DE92E64638}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA18471D-C57D-4144-B312-6963CF9E0611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA18471D-C57D-4144-B312-6963CF9E0611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA18471D-C57D-4144-B312-6963CF9E0611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA18471D-C57D-4144-B312-6963CF9E0611}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
