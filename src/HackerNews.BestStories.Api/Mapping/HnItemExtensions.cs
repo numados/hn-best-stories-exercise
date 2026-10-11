@@ -11,6 +11,8 @@ public static class HnItemExtensions
     /// <returns>True when either flag is true.</returns>
     public static bool IsUnavailable(this HnItem item) => item.Deleted is true || item.Dead is true;
 
+    /// <summary>Checks whether the item is a complete, available story that <see cref="ToDto"/> can map.</summary>
+    /// <returns>True when the item is not deleted or dead and every required field is present.</returns>
     public static bool CanMapToDto(this HnItem item) => TryGetRequiredValues(
         item,
         out _,
@@ -18,6 +20,11 @@ public static class HnItemExtensions
         out _,
         out _);
 
+    /// <summary>Maps an available item to the response DTO; a missing URL falls back to the
+    /// Hacker News item page and a null comment count maps to zero.</summary>
+    /// <returns>The DTO with Unix time converted to UTC DateTimeOffset.</returns>
+    /// <exception cref="InvalidOperationException">The item is unavailable or incomplete;
+    /// check <see cref="CanMapToDto"/> first.</exception>
     public static BestStoryDto ToDto(this HnItem item)
     {
         if (!TryGetRequiredValues(

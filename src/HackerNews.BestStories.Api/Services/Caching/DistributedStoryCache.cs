@@ -6,12 +6,17 @@ using Microsoft.Extensions.Options;
 
 namespace HackerNews.BestStories.Api.Services.Caching;
 
+/// <summary><see cref="IStoryCache"/> that serializes entries as JSON bytes into a registered
+/// <see cref="IDistributedCache"/>, so entries are shared across processes and survive restarts.</summary>
 public sealed class DistributedStoryCache(
     IDistributedCache cache,
     IOptions<CacheOptions> options) : IStoryCache
 {
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web);
 
+    /// <inheritdoc />
+    /// <remarks>A key absent from the backend maps to <see cref="StoryCacheEntry.Miss"/>;
+    /// lifetimes are delegated to the backend's absolute expiration.</remarks>
     public async Task<StoryCacheEntry> GetAsync(int id, CancellationToken cancellationToken)
     {
         byte[]? value = await cache.GetAsync(StoryCacheKey.For(id), cancellationToken);
@@ -21,6 +26,7 @@ public sealed class DistributedStoryCache(
             : JsonSerializer.Deserialize<StoryCacheEntry>(value, SerializerOptions);
     }
 
+    /// <inheritdoc />
     public Task SetStoryAsync(HnItem item, CancellationToken cancellationToken) =>
         SetAsync(
             item.Id,
@@ -28,6 +34,7 @@ public sealed class DistributedStoryCache(
             options.Value.ItemTtl,
             cancellationToken);
 
+    /// <inheritdoc />
     public Task SetUnavailableAsync(int id, CancellationToken cancellationToken) =>
         SetAsync(id, StoryCacheEntry.Unavailable, options.Value.NegativeTtl, cancellationToken);
 

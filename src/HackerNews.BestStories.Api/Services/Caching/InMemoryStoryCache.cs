@@ -5,10 +5,13 @@ using Microsoft.Extensions.Options;
 
 namespace HackerNews.BestStories.Api.Services.Caching;
 
+/// <summary>Process-local <see cref="IStoryCache"/> over <see cref="IMemoryCache"/>; entries live
+/// only as long as this process and are stored as struct references.</summary>
 public sealed class InMemoryStoryCache(
     IMemoryCache cache,
     IOptions<CacheOptions> options) : IStoryCache
 {
+    /// <inheritdoc />
     public Task<StoryCacheEntry> GetAsync(int id, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -20,6 +23,7 @@ public sealed class InMemoryStoryCache(
         return Task.FromResult(entry);
     }
 
+    /// <inheritdoc />
     public Task SetStoryAsync(HnItem item, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -31,6 +35,7 @@ public sealed class InMemoryStoryCache(
         return Task.CompletedTask;
     }
 
+    /// <inheritdoc />
     public Task SetUnavailableAsync(int id, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();

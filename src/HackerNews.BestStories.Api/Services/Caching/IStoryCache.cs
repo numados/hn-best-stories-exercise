@@ -46,8 +46,11 @@ public readonly record struct StoryCacheEntry(StoryCacheEntryKind Kind, HnItem? 
     public static StoryCacheEntry FromStory(HnItem story) => new(StoryCacheEntryKind.Story, story);
 }
 
+/// <summary>The single owner of the story cache key format, shared by every provider.</summary>
 internal static class StoryCacheKey
 {
+    /// <summary>Builds the cache key for an item ID; the format is stable across providers.</summary>
+    /// <returns>The key <c>hacker-news:story:{id}</c>.</returns>
     public static string For(int id) =>
         $"hacker-news:story:{id.ToString(CultureInfo.InvariantCulture)}";
 }

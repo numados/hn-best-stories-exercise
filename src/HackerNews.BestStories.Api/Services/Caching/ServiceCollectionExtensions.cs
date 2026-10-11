@@ -9,6 +9,9 @@ public static class ServiceCollectionExtensions
     /// <summary>The connection string that backs the distributed story cache.</summary>
     public const string RedisConnectionStringName = "Redis";
 
+    /// <summary>Binds and validates <see cref="CacheOptions"/>, then registers the selected
+    /// <see cref="IStoryCache"/> provider. The Distributed provider additionally registers the
+    /// Redis backend from <c>ConnectionStrings:Redis</c> and fails when the connection string is missing.</summary>
     public static IServiceCollection AddStoryCache(
         this IServiceCollection services,
         IConfiguration configuration)

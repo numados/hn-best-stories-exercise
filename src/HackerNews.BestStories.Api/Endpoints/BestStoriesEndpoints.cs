@@ -9,6 +9,7 @@ namespace HackerNews.BestStories.Api.Endpoints;
 
 public static class BestStoriesEndpoints
 {
+    /// <summary>Maps the best-stories and health endpoints.</summary>
     public static IEndpointRouteBuilder MapBestStoriesApi(this IEndpointRouteBuilder endpoints)
     {
         endpoints

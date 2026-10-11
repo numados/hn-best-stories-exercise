@@ -12,6 +12,14 @@ internal sealed class StoryResolver(
     IStoryCache storyCache,
     ILogger logger)
 {
+    /// <summary>Resolves one item through the cache, fetching upstream only on a miss and
+    /// negatively caching confirmed unavailability. On a non-cancellation failure the previous
+    /// value is retained when the ID was in the last snapshot, and the item is otherwise excluded;
+    /// cache-write failures are logged and do not discard the resolved item.</summary>
+    /// <param name="id">The item ID to resolve.</param>
+    /// <param name="previousItems">Items from the last snapshot, keyed by ID.</param>
+    /// <param name="nextItems">The collector for items accepted into the next snapshot.</param>
+    /// <param name="itemCancellationToken">Cancels the per-item resolution work.</param>
     public async Task ResolveAsync(
         int id,
         ImmutableDictionary<int, HnItem> previousItems,
